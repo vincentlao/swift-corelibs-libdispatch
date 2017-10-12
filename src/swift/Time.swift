@@ -79,7 +79,7 @@ public struct DispatchTime : Comparable {
 		// UInt64.max means distantFuture. Do not try to scale it.
 		if rawValue != UInt64.max && DispatchTime.timebaseInfo.numer != DispatchTime.timebaseInfo.denom {
 			(result, overflow) = result.multipliedReportingOverflow(by: UInt64(DispatchTime.timebaseInfo.numer))
-			result = (overflow ? UInt64.max : result)/UInt64(DispatchTime.timebaseInfo.denom)
+			result = overflow ? UInt64.max : result / UInt64(DispatchTime.timebaseInfo.denom)
 		}
 #endif
 		return result
